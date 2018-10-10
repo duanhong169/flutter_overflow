@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:collection';
+import 'package:flutter_overflow/constants.dart';
 
 class HomeScreen extends StatelessWidget {
 
   final String title;
-  final LinkedHashMap questionSortTypes = LinkedHashMap.from({
-    "activity" : "Active",
-    "votes" : "Votes",
-    "creation" : "Newest",
-    "hot" : "Hot Today",
-    "week" : "Hot Weekly",
-    "month" : "Hot Monthly",
-  });
 
   HomeScreen({@required this.title}) : super();
 
