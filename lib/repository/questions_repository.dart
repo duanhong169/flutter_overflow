@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:core';
-import 'package:flutter_overflow/models/models.dart';
+import 'question_entity.dart';
 
 abstract class QuestionsRepository {
 
-  Future<List<Question>> loadQuestions();
+  Future<List<QuestionEntity>> fetchQuestions(Map params);
 }

@@ -1,3 +1,5 @@
+import 'package:flutter_overflow/models/models.dart';
+
 class SelectSortTypeAction {
   final String sortType;
 
@@ -6,6 +8,10 @@ class SelectSortTypeAction {
 
 class LoadQuestionsAction {}
 
-class QuestionsLoadedAction {}
+class QuestionsLoadedAction {
+  final List<Question> questions;
+
+  QuestionsLoadedAction(this.questions);
+}
 
 class QuestionsNotLoadedAction {}

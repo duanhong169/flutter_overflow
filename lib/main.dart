@@ -5,6 +5,8 @@ import 'package:flutter_overflow/models/models.dart';
 import 'package:flutter_overflow/reducers/app_state_reducer.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_overflow/actions/actions.dart';
+import 'package:flutter_overflow/middleware/store_stack_overflow_middleware.dart';
+import 'constants.dart';
 
 void main() => runApp(new MyApp());
 
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   final store = Store<AppState>(
     appReducer,
     initialState: AppState.loading(),
+    middleware: createStoreStackOverflowMiddleware(),
   );
 
   @override
@@ -26,7 +29,8 @@ class MyApp extends StatelessWidget {
         home: StoreBuilder<AppState>(
             onInit: (store) => store.dispatch(LoadQuestionsAction()),
             builder: (context, store) {
-              HomeScreen(title: 'FlutterOverflow');
+              String title = questionSortTypes[store.state.selectedSortType];
+              return HomeScreen(title: title);
             }),
       ),
     );
