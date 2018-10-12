@@ -25,8 +25,9 @@ class LoadQuestionsAction {
 
 class QuestionsLoadedAction {
   final List<Question> questions;
+  final bool append;
 
-  QuestionsLoadedAction(this.questions);
+  QuestionsLoadedAction(this.questions, {this.append = true});
 }
 
 class QuestionsNotLoadedAction {}

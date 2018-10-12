@@ -20,9 +20,11 @@ class QuestionsListEntity {
       questions.hashCode;
 
   static QuestionsListEntity fromJson(Map<String, dynamic> json) {
+    List jsonItems = json["items"];
+    List<QuestionEntity> items = jsonItems.map((item) => QuestionEntity.fromJson(item)).toList();
     return QuestionsListEntity(
       json["has_more"] as bool,
-      json["items"] as List<QuestionEntity>,
+      items,
     );
   }
 }

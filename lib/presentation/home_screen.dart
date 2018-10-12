@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overflow/containers/sort_types.dart';
+import 'package:flutter_overflow/containers/sorted_questions.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -16,6 +17,7 @@ class HomeScreen extends StatelessWidget {
       drawer: Drawer(
         child: SortTypes(),
       ),
+      body: SortedQuestions(),
     );
   }
 }

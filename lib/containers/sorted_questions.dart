@@ -11,8 +11,7 @@ class SortedQuestions extends StatelessWidget {
     return StoreConnector<AppState, _ViewModel>(
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
-        return QuestionList(
-        );
+        return QuestionList(vm.questions);
       },
     );
   }
@@ -29,8 +28,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      // TODO
-      questions: null,
+      questions: store.state.questions,
       isLoading: store.state.isLoading,
     );
   }
