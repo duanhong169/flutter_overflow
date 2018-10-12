@@ -10,16 +10,16 @@ List<Middleware<AppState>> createStoreStackOverflowMiddleware([
     questionRepo = QuestionsServiceRepository();
   }
 
-  final fetchQuestions = _createLoadQuestions(questionRepo);
+  final fetchQuestions = _createFetchQuestions(questionRepo);
 
   return [
     TypedMiddleware<AppState, LoadQuestionsAction>(fetchQuestions)
   ];
 }
 
-Middleware<AppState> _createLoadQuestions(QuestionsRepository repository) {
+Middleware<AppState> _createFetchQuestions(QuestionsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    repository.fetchQuestions(null).then(
+    repository.fetchQuestions(action.params).then(
           (questions) {
             store.dispatch(
               QuestionsLoadedAction(

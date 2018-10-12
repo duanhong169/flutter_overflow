@@ -26,7 +26,19 @@ class DioHttpClient {
     };
   }
 
-  Future<List<QuestionEntity>> fetchQuestions(Map params) {
-
+  Future<List<QuestionEntity>> fetchQuestions(Map<String, dynamic> params) async {
+    try {
+      Response<Map<String, dynamic>> response = await _dio.get("questions", data: params);
+      return QuestionsListEntity.fromJson(response.data).questions;
+    } on DioError catch(e) {
+      if(e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        print(e.message);
+      }
+      rethrow;
+    }
   }
 }

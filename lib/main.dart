@@ -27,7 +27,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
         ),
         home: StoreBuilder<AppState>(
-            onInit: (store) => store.dispatch(LoadQuestionsAction()),
+            onInit: (store) => store.dispatch(
+                LoadQuestionsAction.params(
+                    page: 1,
+                    sortType: store.state.selectedSortType
+                )
+            ),
             builder: (context, store) {
               String title = questionSortTypes[store.state.selectedSortType];
               return HomeScreen(title: title);

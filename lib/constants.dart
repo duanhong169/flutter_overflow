@@ -8,3 +8,5 @@ final LinkedHashMap questionSortTypes = LinkedHashMap.from({
   "week" : "Hot Weekly",
   "month" : "Hot Monthly",
 });
+
+const int DEF_PAGE_SIZE = 30;

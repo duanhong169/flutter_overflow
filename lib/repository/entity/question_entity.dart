@@ -17,14 +17,7 @@ class QuestionEntity {
       score.hashCode ^
       title.hashCode;
 
-  Map<String, Object> toJson() {
-    return {
-      "score": score,
-      "title": title,
-    };
-  }
-
-  static QuestionEntity fromJson(Map<String, Object> json) {
+  static QuestionEntity fromJson(Map<String, dynamic> json) {
     return QuestionEntity(
       json["score"] as int,
       json["title"] as String,
