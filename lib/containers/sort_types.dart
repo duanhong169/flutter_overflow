@@ -35,7 +35,7 @@ class SortTypes extends StatelessWidget {
             ),
           ),
           decoration: BoxDecoration(
-            color: Colors.purple,
+            color: Colors.blue,
           ),
         )
     ));
@@ -66,6 +66,10 @@ class _ViewModel {
       selectedSortType: store.state.selectedSortType,
       onSortTypeSelected: (key) {
         store.dispatch(SelectSortTypeAction(key));
+        store.dispatch(LoadQuestionsAction.params(
+            page: 1,
+            sortType: store.state.selectedSortType
+        ));
       },
     );
   }

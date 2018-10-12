@@ -24,6 +24,7 @@ Middleware<AppState> _createFetchQuestions(QuestionsRepository repository) {
             store.dispatch(
               QuestionsLoadedAction(
                 questions.map(Question.fromEntity).toList(),
+                append: action.params["page"] != 1,
               ),
             );
           },
