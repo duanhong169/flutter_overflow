@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
 import 'dart:async';
 import 'package:flutter_overflow/repository/stack_overflow_repository.dart';
+import 'package:flutter_overflow/helpers.dart';
 
 class DioHttpClient {
   static final DioHttpClient _httpClient = DioHttpClient._internal();
@@ -24,21 +25,24 @@ class DioHttpClient {
       }
       return options;
     };
-  }
-
-  Future<List<QuestionEntity>> fetchQuestions(Map<String, dynamic> params) async {
-    try {
-      Response<Map<String, dynamic>> response = await _dio.get("questions", data: params);
-      return QuestionsListEntity.fromJson(response.data).questions;
-    } on DioError catch(e) {
+    _dio.interceptor.response.onSuccess = (Response response) {
+      print("response data: ${response.data.toString()}");
+      print(printForDioOptions(response.request));
+      return response;
+    };
+    _dio.interceptor.response.onError = (DioError e) {
       if(e.response != null) {
         print(e.response.data);
-        print(e.response.headers);
         print(e.response.request);
       } else {
         print(e.message);
       }
-      rethrow;
-    }
+      return e;
+    };
+  }
+
+  Future<List<QuestionEntity>> fetchQuestions(Map<String, dynamic> params) async {
+    Response<Map<String, dynamic>> response = await _dio.get("questions", data: params);
+    return QuestionsListEntity.fromJson(response.data).questions;
   }
 }
