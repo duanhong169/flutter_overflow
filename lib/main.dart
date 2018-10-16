@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_overflow/presentation/home_screen.dart';
+import 'package:flutter_overflow/containers/active_home_screen.dart';
 import 'package:redux/redux.dart';
 import 'package:logging/logging.dart';
 import 'package:redux_logging/redux_logging.dart';
@@ -8,7 +8,6 @@ import 'package:flutter_overflow/reducers/app_state_reducer.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_overflow/actions/actions.dart';
 import 'package:flutter_overflow/middleware/store_stack_overflow_middleware.dart';
-import 'constants.dart';
 
 void main() => runApp(new MyApp());
 
@@ -39,8 +38,7 @@ class MyApp extends StatelessWidget {
                 )
             ),
             builder: (context, store) {
-              String title = questionSortTypes[store.state.selectedSortType];
-              return HomeScreen(title: title);
+              return ActiveHomeScreen();
             }),
       ),
     );

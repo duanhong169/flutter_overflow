@@ -27,8 +27,12 @@ Middleware<AppState> _createFetchQuestions(QuestionsRepository repository) {
                 append: action.params["page"] != 1,
               ),
             );
+            action.completer.complete();
           },
-    ).catchError((_) => store.dispatch(QuestionsNotLoadedAction()));
+    ).catchError((_) {
+        store.dispatch(QuestionsNotLoadedAction());
+        action.completer.complete();
+    });
 
     next(action);
   };
