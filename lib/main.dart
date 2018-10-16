@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overflow/presentation/home_screen.dart';
 import 'package:redux/redux.dart';
+import 'package:logging/logging.dart';
+import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter_overflow/models/models.dart';
 import 'package:flutter_overflow/reducers/app_state_reducer.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -10,11 +12,14 @@ import 'constants.dart';
 
 void main() => runApp(new MyApp());
 
+final logger = new Logger("Redux Logger");
+final loggerMiddleware = LoggingMiddleware<AppState>.printer(logger: logger);
+
 class MyApp extends StatelessWidget {
   final store = Store<AppState>(
     appReducer,
     initialState: AppState.loading(),
-    middleware: createStoreStackOverflowMiddleware(),
+    middleware: createStoreStackOverflowMiddleware()..add(loggerMiddleware),
   );
 
   @override

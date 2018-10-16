@@ -180,7 +180,7 @@ packages:
     source: hosted
     version: "0.3.6"
   logging:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logging
       url: "https://pub.flutter-io.cn"
@@ -277,6 +277,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
+  redux_logging:
+    dependency: "direct main"
+    description:
+      name: redux_logging
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.0"
   shelf:
     dependency: transitive
     description:
