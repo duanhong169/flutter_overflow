@@ -27,11 +27,11 @@ Middleware<AppState> _createFetchQuestions(QuestionsRepository repository) {
                 append: action.params["page"] != 1,
               ),
             );
-            action.completer.complete();
+            action.completer.complete(true);
           },
     ).catchError((_) {
         store.dispatch(QuestionsNotLoadedAction());
-        action.completer.complete();
+        action.completer.complete(false);
     });
 
     next(action);

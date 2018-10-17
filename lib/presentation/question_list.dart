@@ -3,12 +3,15 @@ import 'package:flutter_overflow/containers/app_loading.dart';
 import 'loading_indicator.dart';
 import 'question_item.dart';
 import 'package:flutter_overflow/models/models.dart';
+import 'package:flutter_overflow/containers/managed_list_view.dart';
+import 'package:flutter_overflow/helpers.dart';
 
 class QuestionList extends StatelessWidget {
 
   final List<Question> questions;
+  final LoadMoreCallback onLoadMore;
 
-  QuestionList(this.questions);
+  QuestionList(this.questions, this.onLoadMore);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +22,10 @@ class QuestionList extends StatelessWidget {
     });
   }
 
-  ListView _buildListView() {
-    return ListView.builder(
+  ManagedListView _buildListView() {
+    return ManagedListView(
       itemCount: questions.length,
-      itemBuilder: (BuildContext context, int index) {
+      builder: (BuildContext context, int index) {
         final question = questions[index];
 
         return QuestionItem(
@@ -30,6 +33,7 @@ class QuestionList extends StatelessWidget {
           onTap: () => _onQuestionTap(context, question),
         );
       },
+      onLoadMore: this.onLoadMore,
     );
   }
 
