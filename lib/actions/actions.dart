@@ -1,7 +1,6 @@
 import 'package:flutter_overflow/models/models.dart';
 import 'package:flutter_overflow/constants.dart';
 import 'dart:async';
-import 'package:meta/meta.dart';
 
 class SelectSortTypeAction {
   final String sortType;

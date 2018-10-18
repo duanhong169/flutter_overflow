@@ -17,7 +17,7 @@ final loggerMiddleware = LoggingMiddleware<AppState>.printer(logger: logger);
 class MyApp extends StatelessWidget {
   final store = Store<AppState>(
     appReducer,
-    initialState: AppState.loading(),
+    initialState: AppState.loadingQuestions(),
     middleware: createStoreStackOverflowMiddleware()..add(loggerMiddleware),
   );
 

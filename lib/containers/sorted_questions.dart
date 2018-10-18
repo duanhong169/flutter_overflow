@@ -13,7 +13,10 @@ class SortedQuestions extends StatelessWidget {
     return StoreConnector<AppState, _ViewModel>(
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
-        return QuestionList(vm.questions, vm.onLoadMore);
+        return RefreshIndicator(
+          child: QuestionList(vm.questions, vm.onLoadMore),
+          onRefresh: vm.onRefresh,
+        );
       },
     );
   }
@@ -21,19 +24,18 @@ class SortedQuestions extends StatelessWidget {
 
 class _ViewModel {
   final List<Question> questions;
-  final bool isLoading;
   final LoadMoreCallback onLoadMore;
+  final RefreshCallback onRefresh;
 
   _ViewModel({
     @required this.questions,
-    @required this.isLoading,
     @required this.onLoadMore,
+    @required this.onRefresh,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       questions: store.state.questions,
-      isLoading: store.state.isLoading,
       onLoadMore: (int page) {
         LoadQuestionsAction action = LoadQuestionsAction.params(
             page: page,
@@ -41,7 +43,12 @@ class _ViewModel {
         );
         store.dispatch(action);
         return action.completer.future;
-      }
+      },
+      onRefresh: () {
+        LoadQuestionsAction action = LoadQuestionsAction.params(sortType: store.state.selectedSortType);
+        store.dispatch(action);
+        return action.completer.future;
+      },
     );
   }
 }

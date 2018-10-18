@@ -3,30 +3,34 @@ import 'package:flutter_overflow/models/models.dart';
 
 @immutable
 class AppState {
-  final bool isLoading;
+  final bool isLoadingQuestions;
   final String selectedSortType;
   final List<Question> questions;
+  final bool isLoadingMoreQuestions;
+  final int questionsPage;
 
   AppState({
-    this.isLoading = false,
+    this.isLoadingQuestions = false,
     this.selectedSortType = "activity",
     this.questions = const [],
+    this.isLoadingMoreQuestions = false,
+    this.questionsPage = 0
   });
 
-  factory AppState.loading() => AppState(isLoading: true);
+  factory AppState.loadingQuestions() => AppState(isLoadingQuestions: true);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
           other is AppState &&
               runtimeType == other.runtimeType &&
-              isLoading == other.isLoading &&
+              isLoadingQuestions == other.isLoadingQuestions &&
               selectedSortType == other.selectedSortType &&
               questions == other.questions;
 
   @override
   int get hashCode =>
-      isLoading.hashCode ^
+      isLoadingQuestions.hashCode ^
       selectedSortType.hashCode ^
       questions.hashCode;
 }
